@@ -1,0 +1,25 @@
+<p>teste</p>
+<div class="vagas-grid" *ngIf="vagasCarregadas && dadosEstacionamento.length > 0">
+  <div class="vaga-card" *ngFor="let vaga of dadosEstacionamento">
+    <div class="vaga-header">Estacionamento</div>
+    <div class="vaga-dado">{{ vaga.nomeest }}</div>
+
+    <div class="vaga-header">Placa</div>
+    <div class="vaga-dado">{{ vaga.plavei }}</div>
+
+    <div class="vaga-header">Status</div>
+    <div class="vaga-livre-conteudo">{{ vaga.status }}</div>
+
+    <div class="action-button-container">
+      <button class="reservar" (click)="redirectToBPM()">Solicitar</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="vagasCarregadas && dadosEstacionamento.length === 0">
+  Nenhuma vaga disponível no momento.
+</div>
+
+<div *ngIf="!vagasCarregadas">
+  Carregando vagas...
+</div>

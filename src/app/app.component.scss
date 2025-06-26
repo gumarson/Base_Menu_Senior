@@ -1,0 +1,30 @@
+.title-box {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 70px;
+  background-color: #fff;
+  display: -ms-flexbox;
+  display: flex;
+  box-shadow: 0 0 6px rgba(0,0,0,.16);
+;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  align-items: center;
+  position: fixed;
+}
+
+.title {
+  color: #999;
+  font-weight: 400;
+  font-size: 16pt;
+  margin-right: 15px;
+  min-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

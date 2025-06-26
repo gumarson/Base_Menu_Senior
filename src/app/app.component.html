@@ -1,0 +1,16 @@
+<app-loading *ngIf="isLoading"></app-loading>
+<div *ngIf="!isLoading">
+
+  <div class="title-box">
+    <h1 class="title">
+      {{ title }}
+    </h1>
+  </div>
+
+  <div style="margin-top: 75px;padding: 15px;">
+    <div class="container">
+      <p-toast></p-toast>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
