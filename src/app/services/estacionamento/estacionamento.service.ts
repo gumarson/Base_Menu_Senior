@@ -9,7 +9,7 @@ import { InvokeService } from '@services/invoke/invoke.services';
 export class EstacionamentoService {
   private url =
     'https://platform-homologx.senior.com.br/t/senior.com.br/bridge/1.0/rest/platform/conector/actions/invoke';
-  private server = 'http://ec2-54-224-31-208.compute-1.amazonaws.com:8080/';
+  private server = 'http://ec2-54-86-30-4.compute-1.amazonaws.com:8080/';
   private id = 'b0d5b4d8-a857-4261-bb7e-efa6342296e1';
 
   constructor(private http: HttpClient) {}

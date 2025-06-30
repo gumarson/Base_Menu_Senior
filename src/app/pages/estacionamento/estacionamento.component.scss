@@ -1,46 +1,120 @@
-.vagas-grid {
+/* --- Layout do Seletor --- */
+.estacionamento-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 16px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 24px;
+}
+
+.estacionamento-select-label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+#estacionamentoSelect {
+  width: 100%;
+  max-width: 400px; 
+  padding: 8px 12px;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  font-size: 15px;
+  background: #fafafa;
+  transition: border-color 0.2s;
+  outline: none;
+
+  &:focus {
+    border-color: #388e3c;
+    background: #fff;
+  }
+}
+
+/* --- Layout do Grid de Vagas --- */
+.vagas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px; 
   padding: 20px 0;
 }
 
+/* --- Estilo Base do Card de Vaga --- */
 .vaga-card {
-  width: 160px;
-  height: 140px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 12px;
-  box-sizing: border-box;
-  text-align: center;
-  font-weight: bold;
+
+  aspect-ratio: 1 / 1; 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center;
+
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  text-align: center;
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+  box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
 }
 
-.vaga-header {
-  font-size: 14px;
-  margin-bottom: 4px;
+/* --- Modificadores de Status do Card --- */
+/* Aplica o estilo ao card inteiro quando a vaga está LIVRE */
+.vaga-card.vaga-livre {
+  background-color: #f1f8e9; 
+  border-color: #a5d6a7;
 }
 
-.vaga-dado {
-  font-size: 13px;
-  font-weight: normal;
+/* Aplica o estilo ao card inteiro quando a vaga está OCUPADA */
+.vaga-card.vaga-ocupada {
+  background-color: #ffebee;
+  border-color: #ef9a9a;
 }
 
-.vaga-livre-conteudo {
-  font-size: 20px;
+/* --- Conteúdo do Card --- */
+.vaga-status-header {
   font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/* Cor do texto do header para vaga livre */
+.vaga-card.vaga-livre .vaga-status-header {
   color: #2e7d32;
 }
 
-.action-button-container {
-  margin-top: 20px;
+/* Cor do texto do header para vaga ocupada */
+.vaga-card.vaga-ocupada .vaga-status-header {
+  color: #c62828;
+}
+
+.vaga-detalhes {
+  font-size: 13px;
+}
+
+.vaga-header {
+  font-weight: 500;
+  color: #616161;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.vaga-dado {
+  font-weight: 600;
+  color: #212121;
+}
+
+/* --- Botão e Separador --- */
+.solicitar-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  margin-top: 16px;
 }
 
 button.reservar {
@@ -49,19 +123,19 @@ button.reservar {
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
+  box-shadow: 0 2px 4px rgba(56, 142, 60, 0.08);
+  transition: background-color 0.2s;
 
   &:hover {
     background-color: #2e7d32;
   }
 }
 
-button.admin {
-  background-color: #d32f2f;
-  color: white;
-  padding: 10px 20px;
+.separador-conteudo {
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
+  border-top: 1px solid #e0e0e0;
+  margin: 24px 0 16px 0;
 }

@@ -1,25 +1,50 @@
-<p>teste</p>
-<div class="vagas-grid" *ngIf="vagasCarregadas && dadosEstacionamento.length > 0">
-  <div class="vaga-card" *ngFor="let vaga of dadosEstacionamento">
-    <div class="vaga-header">Estacionamento</div>
-    <div class="vaga-dado">{{ vaga.nomeest }}</div>
+<!-- Container para seleção do estacionamento -->
+<div class="estacionamento-container" *ngIf="dadosEstacionamento.length > 0">
+  <label class="estacionamento-select-label" for="estacionamentoSelect">Escolha um estacionamento:</label>
+  <!-- MUDANÇA: ngModel agora usa 'estacionamentoSelecionadoId' e o value da option é 'est.codest' -->
+  <select id="estacionamentoSelect" [(ngModel)]="estacionamentoSelecionadoId" (change)="aoSelecionarEstacionamento()">
+    <option value="" disabled>Selecione...</option>
+    <option *ngFor="let est of dadosEstacionamento" [value]="est.codest">
+      {{ est.desest }}
+    </option>
+  </select>
+</div>
 
-    <div class="vaga-header">Placa</div>
-    <div class="vaga-dado">{{ vaga.plavei }}</div>
+<!-- Indicador de Carregamento para os Estacionamentos -->
+<div *ngIf="dadosEstacionamento.length === 0">
+  Carregando estacionamentos...
+</div>
 
-    <div class="vaga-header">Status</div>
-    <div class="vaga-livre-conteudo">{{ vaga.status }}</div>
+<hr class="separador-conteudo" *ngIf="estacionamentoSelecionadoId">
 
-    <div class="action-button-container">
-      <button class="reservar" (click)="redirectToBPM()">Solicitar</button>
+<!-- Indicador de Carregamento para as Vagas -->
+<div *ngIf="carregandoVagas">
+  Carregando vagas...
+</div>
+
+<!-- Grid de Vagas -->
+<div class="vagas-grid" *ngIf="!carregandoVagas && vagasCarregadas.length > 0">
+  <div class="vaga-card" *ngFor="let vaga of vagasCarregadas" [class.vaga-livre]="vaga.status === 'LIVRE'" [class.vaga-ocupada]="vaga.status === 'OCUPADA'">
+    <div class="vaga-status-header">
+      <span *ngIf="vaga.status === 'LIVRE'">Vaga Livre</span>
+      <span *ngIf="vaga.status === 'OCUPADA'">Vaga Ocupada</span>
+    </div>
+    <div class="vaga-detalhes" *ngIf="vaga.status === 'OCUPADA'">
+      <div class="vaga-header">Modelo</div>
+      <div class="vaga-dado">{{ vaga.modvei }}</div>
+      <div class="vaga-header">Placa</div>
+      <div class="vaga-dado">{{ vaga.plavei }}</div>
     </div>
   </div>
 </div>
 
-<div *ngIf="vagasCarregadas && dadosEstacionamento.length === 0">
-  Nenhuma vaga disponível no momento.
+<!-- Mensagem de Estacionamento Lotado -->
+<div *ngIf="!carregandoVagas && estacionamentoSelecionadoId && !temVagasLivres">
+  Estacionamento lotado. Nenhuma vaga disponível no momento.
 </div>
 
-<div *ngIf="!vagasCarregadas">
-  Carregando vagas...
+<!-- Botão de Solicitação -->
+<div class="solicitar-container" *ngIf="!carregandoVagas && temVagasLivres">
+  <button class="reservar" (click)="redirectToBPM()">Solicitar Reserva</button>
 </div>
+
